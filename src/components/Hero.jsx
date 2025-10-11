@@ -32,7 +32,7 @@ export default function Hero() {
       <div className="hero__art">
         <div className="card-hero glass">
           <img
-            src="https://placehold.co/520x360?text=Curated+Books"
+            src="./images/heroimg.jpg"
             alt="Curated books preview"
           />
         </div>

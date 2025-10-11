@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { BOOKS } from "../data/books.mock.js";
 import BookCardPremium from "../components/BookCardPremium.jsx";
-// App.jsx
 import "../App.css";
 
 // --- helpers: stable "mixed" order so All doesn't cluster by language ---
@@ -19,9 +18,9 @@ function stableShuffle(arr) {
 
 export default function BooksList() {
   const [sp, setSp] = useSearchParams();
-  const lang = sp.get("lang") || "all";      // all|mr|hi|en
+  const lang = sp.get("lang") || "all"; // all|mr|hi|en
   const q = sp.get("q") || "";
-  const sort = sp.get("sort") || "";         // "", "price-asc", "price-desc", "rating"
+  const sort = sp.get("sort") || ""; // "", "price-asc", "price-desc", "rating"
   const pageFromUrl = Number(sp.get("page") || 1);
 
   // search input local state
@@ -32,9 +31,7 @@ export default function BooksList() {
   const filtered = useMemo(() => {
     let base = BOOKS;
 
-    if (lang !== "all") {
-      base = base.filter((b) => b.lang === lang);
-    }
+    if (lang !== "all") base = base.filter((b) => b.lang === lang);
 
     const s = (q || "").trim().toLowerCase();
     if (s) {
@@ -45,9 +42,7 @@ export default function BooksList() {
       );
     }
 
-    if (lang === "all") {
-      base = stableShuffle(base);
-    }
+    if (lang === "all") base = stableShuffle(base);
 
     if (sort === "price-asc") base = [...base].sort((a, b) => a.price - b.price);
     if (sort === "price-desc") base = [...base].sort((a, b) => b.price - a.price);
@@ -83,11 +78,14 @@ export default function BooksList() {
 
   // ---------- UI ----------
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "1rem" }}>
+    <div className="page-wrap">
+
       {/* --- TOP CONTROLS (styled by tb-* CSS) --- */}
       <div className="tb-bar theme-dark">
         <form onSubmit={onSubmitSearch} className="tb-search" role="search">
-          <span className="tb-icon" aria-hidden>🔎</span>
+          <span className="tb-icon" aria-hidden>
+            🔎
+          </span>
           <input
             className="tb-input"
             value={searchText}
@@ -95,7 +93,9 @@ export default function BooksList() {
             placeholder="Search title or author..."
             aria-label="Search books"
           />
-          <button type="submit" className="tb-btn">Search</button>
+          <button type="submit" className="tb-btn">
+            Search
+          </button>
         </form>
 
         <div className="tb-controls">
@@ -123,8 +123,12 @@ export default function BooksList() {
             <option value="rating">Rating</option>
           </select>
 
-          <button onClick={clearFilters} className="tb-btn ghost">Reset</button>
-          <Link to="/bestsellers" className="tb-btn link">Bestsellers →</Link>
+          <button onClick={clearFilters} className="tb-btn ghost">
+            Reset
+          </button>
+          <Link to="/bestsellers" className="tb-btn link">
+            Bestsellers →
+          </Link>
         </div>
       </div>
 
@@ -148,22 +152,15 @@ export default function BooksList() {
 
       {/* Grid */}
       {paged.length === 0 ? (
-  <EmptyState q={q} />
-) : (
-  <div
-    style={{
-      display: "grid",
-      /* 5 cols fit in 1200: 5*230 + 4*12 = 1198 */
-      gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))",
-      gap: "12px",
-      alignItems: "stretch",
-    }}
-  >
-    {paged.map((b) => (
-      <BookCardPremium key={b.id} book={b} />
-    ))}
-  </div>
-)}
+        <EmptyState q={q} />
+      ) : (
+        // ⬇️ responsive class (no inline grid styles)
+        <div className="books-grid">
+          {paged.map((b) => (
+            <BookCardPremium key={b.id} book={b} />
+          ))}
+        </div>
+      )}
 
       {/* Pagination */}
       {pageCount > 1 && (
