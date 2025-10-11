@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="16" y1="16" x2="240" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B4DF0"/>
+      <stop offset="1" stop-color="#16C8A0"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".28"/>
+      <stop offset=".7" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded gradient tile -->
+  <rect x="12" y="12" width="232" height="232" rx="52" fill="url(#g)"/>
+  <!-- soft top highlight -->
+  <rect x="12" y="12" width="232" height="80" rx="52" fill="url(#shine)"/>
+
+  <!-- Open-book monogram -->
+  <g fill="#FFFFFF">
+    <!-- Left page (slanted) -->
+    <path d="M76 86 L124 100 L124 196 L76 182 Z" opacity=".98"/>
+    <!-- Right page (slanted mirror) -->
+    <path d="M180 86 L132 100 L132 196 L180 182 Z" opacity=".98"/>
+    <!-- Spine -->
+    <rect x="126" y="104" width="4" height="86" rx="2" opacity=".92"/>
+    <!-- Bookmark ribbon -->
+    <path d="M156 86 L156 122 L168 114 L180 122 L180 86 Z" opacity=".92"/>
+  </g>
+
+  <!-- subtle shadow at bottom to give depth -->
+  <ellipse cx="128" cy="208" rx="76" ry="10" fill="#000" opacity=".06"/>
+</svg>
