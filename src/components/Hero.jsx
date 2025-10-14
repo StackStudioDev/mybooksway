@@ -23,7 +23,6 @@ export default function Hero() {
         </div>
 
         <ul className="hero__stats">
-          <li><strong>10k+</strong><span>Titles</span></li>
           <li><strong>4.8★</strong><span>Avg Rating</span></li>
           <li><strong>24h</strong><span>Dispatch</span></li>
         </ul>

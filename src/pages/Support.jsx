@@ -34,17 +34,22 @@ export default function Support() {
     await new Promise((r) => setTimeout(r, 600)); // simulate API
     const ref = "SUP-" + Date.now().toString(36).toUpperCase();
     setRefId(ref);
-    // keep name/email for convenience
-    setForm((f) => ({ ...f, orderId: "", message: "" }));
+    setForm((f) => ({ ...f, orderId: "", message: "" })); // keep name/email
     setSubmitting(false);
   }
 
+  // ✅ Updated contact details
   const COMPANY = {
-    email: "support@mybooksaway.com",
-    phone: "+91 98765 43210",
-    whatsapp: "+91 91234 56789",
+    email: "mybooksway@gmail.com",
+    phone: "+91 88059 00597",
+    whatsapp: "+91 88059 00597",
     hours: "Mon–Sat, 9:00 AM – 6:00 PM IST",
   };
+
+  // helpers to make proper hrefs
+  const telHref = "tel:+918805900597";
+  const waHref =
+    "https://wa.me/918805900597?text=Hi%20MyBooksWay%20Support%2C%20I%20need%20help%20with%20my%20order.";
 
   return (
     <>
@@ -53,7 +58,6 @@ export default function Support() {
         <span className="muted">We’re here to help — typically replies within 24 hours.</span>
       </header>
 
-      {/* success */}
       {refId && (
         <div className="alert alert--success" role="status">
           <strong>Ticket created.</strong> Ref: <code>{refId}</code>. We’ll email you shortly.
@@ -65,15 +69,9 @@ export default function Support() {
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           <Link to="/shipping" className="btn btn--ghost">Shipping &amp; Delivery</Link>
           <Link to="/refunds" className="btn btn--ghost">Returns &amp; Refunds</Link>
-          <a href="mailto:support@mybooksaway.com" className="btn btn--primary">Email support</a>
-          <a href="tel:+919876543210" className="btn btn--ghost">Call us</a>
-          <a
-            className="btn btn--ghost"
-            href={`https://wa.me/919123456789?text=Hi%20MyBooksWay%20Support%2C%20I%20need%20help%20with%20my%20order.`}
-            target="_blank" rel="noreferrer"
-          >
-            WhatsApp
-          </a>
+          <a href={`mailto:${COMPANY.email}`} className="btn btn--primary">Email support</a>
+          <a href={telHref} className="btn btn--ghost">Call us</a>
+          <a className="btn btn--ghost" href={waHref} target="_blank" rel="noreferrer">WhatsApp</a>
         </div>
       </div>
 
@@ -187,8 +185,8 @@ export default function Support() {
             </div>
             <div className="contact-card">
               <h4>Phone</h4>
-              <p><a className="link" href="tel:+919876543210">{COMPANY.phone}</a></p>
-              <p>WhatsApp: {COMPANY.whatsapp}</p>
+              <p><a className="link" href={telHref}>{COMPANY.phone}</a></p>
+              <p>WhatsApp: <a className="link" href={waHref} target="_blank" rel="noreferrer">{COMPANY.whatsapp}</a></p>
             </div>
           </div>
 

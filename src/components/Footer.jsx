@@ -17,12 +17,13 @@ export default function Footer() {
                 support@mybooksaway.com
               </a>{" "}
               · <b>Phone:</b>{" "}
-              <a className="site-footer__link" href="tel:+919876543210">
-                +91 98765 43210
+              <a className="site-footer__link" href="tel:+918805900597">
+                +91 8805900597
               </a>
             </li>
             <li>
-              <b>Address:</b> 123, MG Road, Andheri West, Mumbai, MH 400053
+              <b>Address:</b>  Vaijinath Nagar, Chikhali Road, Buldhana
+Maharashra - 443001
             </li>
           </ul>
         </div>
