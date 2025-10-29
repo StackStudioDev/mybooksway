@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+// src/pages/Cart.jsx
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 
-const rupee = n => `₹${Number(n || 0).toLocaleString("en-IN")}`;
+const rupee = (n) => `₹${Number(n || 0).toLocaleString("en-IN")}`;
 
 export default function Cart() {
   const { items, setQty, removeItem, clearCart, subtotal } = useCart();
+  const navigate = useNavigate();
 
   if (!items.length) {
     return (
@@ -61,25 +63,24 @@ export default function Cart() {
 
         <aside className="cart__summary glass">
           <h3 style={{marginTop:0}}>Order Summary</h3>
-          <div className="cart__line">
-            <span>Subtotal</span><span>{rupee(subtotal)}</span>
-          </div>
-          <div className="cart__line">
-            <span>Shipping</span><span>₹0</span>
-          </div>
-          <div className="cart__total">
-            <span>Total</span><span>{rupee(subtotal)}</span>
-          </div>
+          <div className="cart__line"><span>Subtotal</span><span>{rupee(subtotal)}</span></div>
+          <div className="cart__line"><span>Shipping</span><span>₹0</span></div>
+          <div className="cart__total"><span>Total</span><span>{rupee(subtotal)}</span></div>
 
-          {/* coupon placeholder */}
           <div style={{display:"flex", gap:8, margin:"10px 0"}}>
             <input className="search__input" placeholder="Coupon code" />
             <button className="btn btn--ghost" type="button">Apply</button>
           </div>
 
-          <button className="btn btn--primary" style={{width:"100%"}}>
+          {/* 👇 अब Razorpay नहीं, Checkout page */}
+          <button
+            className="btn btn--primary"
+            style={{width:"100%"}}
+            onClick={() => navigate("/checkout")}
+          >
             Proceed to checkout
           </button>
+
           <Link to="/books" className="muted" style={{display:"inline-block", marginTop:10}}>
             Continue shopping
           </Link>
